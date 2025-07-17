@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UTokPro - Repurpose Your TikToks</title>
+</head>
+<body>
+    <h1>UTokPro: Repurpose Your TikTok Video</h1>
+
+    {% if error %}
+        <p style="color:red">{{ error }}</p>
+    {% endif %}
+
+    <form action="/repurpose" method="post" enctype="multipart/form-data">
+        <label>Choose Target Platform:</label>
+        <input type="text" name="target_platform" placeholder="e.g. youtube, instagram" required><br><br>
+
+        <label>Upload File:</label>
+        <input type="file" name="file"><br><br>
+
+        <strong>OR</strong><br><br>
+
+        <label>TikTok Video URL:</label>
+        <input type="text" name="tiktok_url" placeholder="https://www.tiktok.com/..."><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

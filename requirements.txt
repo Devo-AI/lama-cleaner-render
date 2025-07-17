@@ -1,0 +1,10 @@
+fastapi==0.111.0
+uvicorn==0.29.0
+python-multipart==0.0.9
+moviepy==2.0.0
+opencv-python==4.10.0.82
+pillow==10.3.0
+ffmpeg-python==0.2.0
+tqdm==4.66.4
+TikTokApi==7.1.0
+playwright==1.53.0

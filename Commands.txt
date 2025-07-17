@@ -1,0 +1,6 @@
+git add app.py
+git push origin main
+
+
+
+.\venv\Scripts\Activate
