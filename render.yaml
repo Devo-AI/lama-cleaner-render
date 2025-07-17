@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: lama-cleaner
+    env: docker
+    plan: starter
+    autoDeploy: true
+    region: oregon
