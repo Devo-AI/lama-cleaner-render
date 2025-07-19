@@ -1,29 +1,24 @@
-# Use Python 3.10 slim image
 FROM python:3.10-slim
 
-# Set working directory
-WORKDIR /app
-
-# Install system dependencies
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     git \
     ffmpeg \
-    libgl1-mesa-glx \
+    libgl1 \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Rust (needed for some Python deps)
-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y && \
-    export PATH="/root/.cargo/bin:$PATH"
+# Set work directory
+WORKDIR /app
 
-ENV PATH="/root/.cargo/bin:$PATH"
+# Clone lama-cleaner
+RUN git clone https://github.com/Sanster/lama-cleaner.git . && \
+    pip install --upgrade pip && \
+    pip install -r requirements.txt && \
+    pip install .
 
-# Install Lama-Cleaner
-RUN pip install --upgrade pip && \
-    pip install lama-cleaner
-
-FROM lama-cleaner/lama-cleaner:latest
-
-# Set default command
-CMD ["python3", "-m", "lama_cleaner", "--model", "lama", "--host", "0.0.0.0", "--port", "8080", "--device", "cpu"]
-
+# Set default port
 EXPOSE 8080
+
+# Start lama-cleaner in CPU mode
+CMD ["python3", "-m", "lama_cleaner", "--model", "lama", "--host", "0.0.0.0", "--port", "8080", "--device", "cpu"]
