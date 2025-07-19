@@ -21,7 +21,9 @@ ENV PATH="/root/.cargo/bin:$PATH"
 RUN pip install --upgrade pip && \
     pip install lama-cleaner
 
+FROM lama-cleaner/lama-cleaner:latest
+
 # Set default command
-CMD ["python", "-m", "lama_cleaner", "--model", "lama", "--port", "8080", "--host", "0.0.0.0"]
+CMD ["python3", "-m", "lama_cleaner", "--model", "lama", "--host", "0.0.0.0", "--port", "8080", "--device", "cpu"]
 
 EXPOSE 8080
