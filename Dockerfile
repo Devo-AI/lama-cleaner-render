@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 
-# Install dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     ffmpeg \
@@ -11,14 +11,14 @@ RUN apt-get update && apt-get install -y \
 # Set work directory
 WORKDIR /app
 
-# Clone lama-cleaner
+# Clone lama-cleaner source code
 RUN git clone https://github.com/Sanster/lama-cleaner.git . && \
     pip install --upgrade pip && \
     pip install -r requirements.txt && \
     pip install .
 
-# Set default port
+# Expose port for Render
 EXPOSE 8080
 
-# Start lama-cleaner in CPU mode
+# Launch lama-cleaner in CPU mode
 CMD ["python3", "-m", "lama_cleaner", "--model", "lama", "--host", "0.0.0.0", "--port", "8080", "--device", "cpu"]
